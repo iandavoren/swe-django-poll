@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [".elasticbeanstalk.com",   # EB preview domains
     ".us-east-1.elasticbeanstalk.com",  # (optional: region-specific)
-    "your-custom-domain.com", "127.0.0.1", "localhost"]
+    "your-custom-domain.com", "127.0.0.1", "localhost", '*']
 
 
 # Application definition
