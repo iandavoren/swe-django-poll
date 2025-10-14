@@ -1,5 +1,7 @@
 [run]
-source = your_django_app_package
+source =
+    mysite
+    polls
 omit =
     */migrations/*
     manage.py

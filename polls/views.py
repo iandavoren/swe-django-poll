@@ -1,17 +1,15 @@
 # from django.shortcuts import render
-from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
-from django.template import loader
-from django.http import Http404
+#from django.template import loader
+#from django.http import Http404
 
-from django.http import HttpResponse
-from .models import Question
+#from django.http import HttpResponse
 from django.views import generic
 
 
 from django.db.models import F
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
