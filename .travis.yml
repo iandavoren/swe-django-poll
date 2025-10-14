@@ -17,15 +17,25 @@ install:
 
 before_script:
   # If your project needs DB setup, add migrate; SQLite works by default
-  - python manage.py migrate --noinput
+    - git fetch --no-tags --unshallow || true
+    - python manage.py migrate --noinput
 
 script:
   - black --check .
   - flake8 .
   - coverage run manage.py test
+  - coverage xml
 
 after_success:
-  - coveralls
+  # - coveralls
+  - echo "TRAVIS_EVENT_TYPE=$TRAVIS_EVENT_TYPE"
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
+  - echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
+  - echo "TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER"
+  # Upload to Coveralls (verbose)
+  - coveralls -v
+  # If you *ever* add a matrix / parallel jobs for the same commit, also run:
+  # - coveralls --finish
 
 # Deploy to Elastic Beanstalk only on main (change branch as needed)
 deploy:
