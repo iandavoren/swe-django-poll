@@ -1,5 +1,3 @@
-
-
 # tests/test_smoke.py
 from django.test import TestCase
 
