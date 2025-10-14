@@ -7,7 +7,7 @@ cache: pip
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=YOURPROJECT.settings
+    - DJANGO_SETTINGS_MODULE=mysite.settings
     # Set SECRET_KEY and any other settings via env vars in Travis settings
 
 install:
@@ -34,10 +34,10 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   region: us-east-1    # <- set to your EB region
-  app: YOUR_EB_APP_NAME
-  env: YOUR_EB_ENV_NAME
-  bucket: YOUR_EB_S3_BUCKET_NAME
-  bucket_path: YOUR_EB_APP_NAME
+  app: djangopoll
+  env: djangopoll-dev
+  bucket: elasticbeanstalk-us-east-1-992862947098
+  bucket_path: djangopoll
   on:
     branch: main
   # Optional: specify a zip if you bundle it yourself
