@@ -32,7 +32,9 @@ after_success:
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH"
   - echo "TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG"
   - echo "TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER"
-  - COVERALLS_NOISY=true coveralls -v
+  - COVERALLS_NOISY=true coveralls --service=travis-pro -v
+  - coveralls --finish || true
+  # - COVERALLS_NOISY=true coveralls -v
   # Upload to Coveralls (verbose)
   # - coveralls -v
   # If you *ever* add a matrix / parallel jobs for the same commit, also run:
