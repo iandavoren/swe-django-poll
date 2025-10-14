@@ -1,0 +1,8 @@
+[run]
+source = your_django_app_package
+omit =
+    */migrations/*
+    manage.py
+
+[report]
+show_missing = True

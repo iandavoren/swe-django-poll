@@ -1,0 +1,44 @@
+language: python
+python:
+  - "3.11"
+
+# faster installs between builds
+cache: pip
+
+env:
+  global:
+    - DJANGO_SETTINGS_MODULE=YOURPROJECT.settings
+    # Set SECRET_KEY and any other settings via env vars in Travis settings
+
+install:
+  - pip install -U pip
+  - pip install -r requirements.txt
+  - pip install black flake8 coverage coveralls
+
+before_script:
+  # If your project needs DB setup, add migrate; SQLite works by default
+  - python manage.py migrate --noinput
+
+script:
+  - black --check .
+  - flake8 .
+  - coverage run manage.py test
+
+after_success:
+  - coveralls
+
+# Deploy to Elastic Beanstalk only on main (change branch as needed)
+deploy:
+  provider: elasticbeanstalk
+  edge: true           # use dpl v2
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+  region: us-east-1    # <- set to your EB region
+  app: YOUR_EB_APP_NAME
+  env: YOUR_EB_ENV_NAME
+  bucket: YOUR_EB_S3_BUCKET_NAME
+  bucket_path: YOUR_EB_APP_NAME
+  on:
+    branch: main
+  # Optional: specify a zip if you bundle it yourself
+  # zip_file: deploy.zip
